@@ -1,5 +1,5 @@
 body {
-  padding: 10px;
+  padding: 60px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,7 +7,38 @@ a {
   color: #00B7FF;
 }
 
-.img-right {
-	height:80px;
-	float:right;
+.img-main {
+	object-fit: cover;
 }
+
+.crop {
+ height: 250px;
+ overflow: hidden;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+       -o-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+.modal-backdrop.in {
+    filter: alpha(opacity=70);
+    opacity: .9;
+}
+
+.app-modal-window .modal-dialog {
+	max-width:75%;
+	width: 800px;
+}
+
+.img-recipe {
+	max-height: 400px;
+}
+
+
+

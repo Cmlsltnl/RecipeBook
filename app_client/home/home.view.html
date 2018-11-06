@@ -1,33 +1,40 @@
 <navigation></navigation>
 <div class="container">
-	<page-header content="vm.pageHeader"></page-header>
-	
-	<div class="row">
-		<div class="col-xs-12 col-sm-8">
+	<page-header ng-hide="navvm.isLoggedIn" content="vm.pageHeader"></page-header>
+	<div class="d-flex align-items-center mb-2" ng-show="navvm.isLoggedIn">
+		<form>
 			<label for="filter">Filter results</label>
 			<input id="filter" type="text", name="filter", ng-model="textFilter">
-			<div class="error">{{ vm.message }}</div>
-			<div class="row list-group">
-				<div class="col-xs-12 list-group-item" ng-repeat="recipe in 
-						vm.data.recipes | filter : textFilter">
-					<h4>
-						<a ng-href="/recipe/{{ recipe._id }}">{{ recipe.name }}</a>
-						<small class="rating-stars" rating-stars rating="recipe.rating"></small>
-						<img class="img-thumbnail img-right" src="{{ recipe.photoUrl }}">
-					</h4>
-					<p class="address">{{ recipe.course }}</p>
+		</form>
+		<button type="button" ng-click="vm.popupNewRecipeModal()" 
+				class="btn btn-secondary btn-sm ml-auto p-2">Add Recipe</button>
+	</div>
+	<div class="row mt-2">{{ vm.message }}</div>
+	<div class="row">
+		<div class="col-md-4 col-sm-6" ng-repeat="recipe in vm.data.recipes | filter : textFilter">
+			<div class="card mb-4 shadow-sm">
+				<div class="crop">
+					<img class="img-thumbnail" ng-src="{{ recipe.photoUrl }}" alt="Recipe Image">
+				</div>
+				<div class="card-body">
+					<h4 class="card-text">{{ recipe.name }}</h4>
 					<p>
-						<span class="label label-warning label-facility" 
-							ng-repeat="tag in recipe.tags">
-								{{ tag }}
+						<span class="badge badge-pill badge-info" ng-repeat="tag in recipe.tags">
+							{{ tag }}
 						</span>
 					</p>
+					<div class="d-flex justify-content-between align-items-center">
+						<div class="btn-group">
+							<a ng-href="/recipes/{{ recipe._id }}" class="btn btn-sm btn-outline-secondary">
+								View</a>
+							<button type="button" ng-click="vm.popupEditRecipeModal(recipe._id)"
+								class="btn btn-sm btn-outline-secondary">Edit</button>
+						</div>
+						<small class="text-muted">{{ recipe.course }}</small>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-4">
-			<p class="lead">{{ vm.sidebar.content }}</p>
-		</div>
+		</div>	
 	</div>
 	
 	<footer-generic></footer-generic>

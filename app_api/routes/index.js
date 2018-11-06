@@ -7,19 +7,17 @@ var auth = jwt({
 	userProperty: 'payload'
 });
 
-
 var ctrlRecipes = require('../controllers/recipes');
 var ctrlAuth = require('../controllers/authentication');
 
 /* Recipes API */
-router.get('/recipes', ctrlRecipes.recipesReadAll);
-router.post('/recipes', ctrlRecipes.recipesCreate);
+router.get('/recipes', auth, ctrlRecipes.recipesReadAll);
+router.post('/recipes', auth, ctrlRecipes.recipesCreate);
 router.get('/recipes/:recipeid', ctrlRecipes.recipesReadOne);
-router.put('/recipes/:recipeid', ctrlRecipes.recipesUpdateOne);
+router.put('/recipes/:recipeid', auth, ctrlRecipes.recipesUpdateOne);
 router.delete('/recipes/:recipeid', ctrlRecipes.recipesDeleteOne);
 
 /* Users */
-
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 

@@ -1,0 +1,118 @@
+
+
+<div class="modal-content">
+	<form id="addRecipe" name="addRecipe" role="form" ng-submit="vm.onSubmit()"
+				class="form-horizontal">
+		<div class="modal-header">
+			<h4 id="myModalLabel" class="modal-title">Add a new Recipe</h4>
+			<button type="button" ng-click="vm.modal.cancel()" class="close"><span
+				aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+		</div>
+		<div class="modal-body">
+			<div role="alert" ng-show="vm.formError" class="alert alert-danger">{{
+			vm.formError }}</div>
+			<div class="container-fluid">
+				<div class="form-row">
+					<div class="col-xs-12 col-md-10">
+						<label for="name">Recipe Name</label>
+						<input class="form-control" type="text" id="name" 
+							ng-model="vm.formData.name" required>
+					</div>
+					<div class="col-xs-12 col-md-2">
+						<label for="rating">Rating</label>
+						<select id="rating" name="rating" ng-model="vm.formData.rating"
+							class="form-control input-sm" placeholder="Rating">
+								<option>5</option>
+								<option>4</option>
+								<option>3</option>
+								<option>2</option>
+								<option>1</option>
+						</select>
+					</div>	
+				</div>
+				<div class="form-row mt-2">
+					<div class="col-6">
+						<label for="ingredients">Ingredients</label>
+						<textarea class="form-control" id="ingredients" rows="6" required
+							ng-model="vm.formData.ingredients" aria-describedby="ingredientsHelpBlock"></textarea>
+						<small id="ingredientsHelpBlock" class="form-text text-muted">
+							Enter one ingredient per line.
+						</small>
+					</div>
+					<div class="col-6">
+						<label for="directions">Directions</label>
+						<textarea class="form-control" id="directions" rows="6" required
+							ng-model="vm.formData.directions" aria-describedby="directionsHelpBlock"></textarea>
+						<small id="directionsHelpBlock" class="form-text text-muted">
+							Enter one step per line.
+						</small>
+					</div>
+				</div>
+				<div class="form-row mt-2">
+					<div class="col-12">
+						<label for="sourceUrl">Source URL</label>
+						<input class="form-control" type="text" id="sourceUrl"
+							ng-model="vm.formData.sourceUrl">
+					</div>
+				</div>
+				<div class="form-row mt-2">
+					<div class="col-12">
+						<label for="photoUrl">Photo URL</label>
+						<input class="form-control" type="text" id="photoUrl"
+							ng-model="vm.formData.photoUrl">
+					</div>
+				</div>
+				<div class="form-row mt-2">
+					<div class="col-3">
+						<label for="prepTime">Prep Time</label>
+						<input class="form-control" type="text" id="prepTime"
+							ng-model="vm.formData.prepTime">
+					</div>
+					<div class="col-3">
+						<label for="cookTime">Cook Time</label>
+						<input class="form-control" type="text" id="cookTime"
+							ng-model="vm.formData.cookTime">
+					</div>
+					<div class="col-3">
+						<label for="servings">Servings</label>
+						<input class="form-control" type="text" id="servings"
+							ng-model="vm.formData.servings">
+					</div>
+					<div class="col-3">
+						<label for="course">Course</label>
+						<input class="form-control" type="text" id="course"
+							ng-model="vm.formData.course">
+					</div>
+				</div>
+				<div class="form-row mt-2">
+					<div class="col-6">
+						<label for="tags">Tags</label>
+						<textarea class="form-control" id="tags" rows="3"
+							ng-model="vm.formData.tags" aria-describedby="tagsHelpBlock"></textarea>
+						<small id="tagsHelpBlock" class="form-text text-muted">
+							Enter one tag per line.
+						</small>
+					</div>
+					<div class="col-6">
+						<label for="notes">Notes</label>
+						<textarea class="form-control" id="notes" rows="3"
+							ng-model="vm.formData.notes" aria-describedby="notesHelpBlock"></textarea>
+						<small id="notesHelpBlock" class="form-text text-muted">
+							Enter one note per line.
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button ng-click="vm.modal.cancel()" type="button" class="btn btn-default">Cancel</button>
+			<button type="submit" class="btn btn-primary">Save Recipe</button>
+		</div>
+	</form>
+</div>
+
+
+
+
+
+		

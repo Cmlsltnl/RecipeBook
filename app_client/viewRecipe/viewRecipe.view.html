@@ -1,0 +1,52 @@
+<navigation></navigation>
+<div class="container">
+	<page-header content="vm.pageHeader"></page-header>
+	<div class="row mb-4">
+		<div class="col-xs-4 col-sm-2">
+			<p>Rating = {{ vm.data.recipe.rating }}</p>
+		</div>
+		<div class="col-xs-4 col-sm-2">
+			<p>Prep Time = {{ vm.data.recipe.prepTime }}</p>
+		</div>
+		<div class="col-xs-4 col-sm-2">
+			<p>Cook Time = {{ vm.data.recipe.cookTime }}</p>
+		</div>
+		<div class="col-xs-4 col-sm-2">
+			<p>Servings = {{ vm.data.recipe.servings }}</p>
+		</div>
+		<div class="col-xs-4 col-sm-2">
+			<p>Course = {{ vm.data.recipe.course }}</p>
+		</div>
+		<div class="col-xs-4 col-sm-2">
+			<a ng-href="{{ vm.data.recipe.sourceUrl }}"> Original Recipe </a>
+		</div>
+	</div>
+	<div class="row justify-content-between mb-4">
+		<div class="col-xs-12 col-md-5">
+			<h4>Ingredients</h4>
+			<p ng-repeat="ingredient in vm.data.recipe.ingredients track by $index">
+				{{ ingredient }}</p>
+		</div>
+		<div class="col-xs-12 col-md-5">
+			<img class="img-fluid img-recipe align-items-end" src="{{ vm.data.recipe.photoUrl }}" alt="Recipe Image">
+		</div>
+	</div>
+	<div class="row mb-4">
+		<div class="col-xs-12 col-md-12">
+			<h4>Directions</h4>
+			<p ng-repeat="step in vm.data.recipe.directions track by $index">
+				{{ step }}</p>
+		</div>
+	</div>
+	
+	<div class="row mb-4">
+		<div class="col-xs-12 col-md-12">
+			<h4>Notes</h4>
+			<p>	{{ vm.data.recipe.notes }}</p>
+		</div>
+	</div>
+			
+	
+	
+	<footer-generic></footer-generic>
+</div>

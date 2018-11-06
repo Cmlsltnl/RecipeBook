@@ -18,6 +18,11 @@
 				controller: 'loginCtrl',
 				controllerAs: 'vm'
 			})
+			.when('/recipes/:recipeid' , {
+				templateUrl: '/viewRecipe/viewRecipe.view.html',
+				controller: 'viewRecipeCtrl',
+				controllerAs: 'vm'
+			})
 			.otherwise({ redirectTo: '/' });
 			
 		$locationProvider.html5Mode({

@@ -1,11 +1,39 @@
 const mongoose = require('mongoose');
 const Recipe = mongoose.model('Recipe');
+const User = mongoose.model('User');
 
 const sendJsonResponse = function(res, status, content) {
 	res.status(status);
 	res.json(content);
 };
 
+const getUserEmail = function(req, res, callback) {
+	if(req.payload && req.payload.email) {
+		User
+			.findOne({ email: req.payload.email })
+			.exec(function (err, user) {
+				if(!user) {
+					sendJsonResponse(res, 404, {
+						"message": "User not found"
+					});
+					return;
+				} else if (err) {
+					console.log(err);
+					sendJsonResponse(res, 404, err);
+					return;
+				} 
+				callback(req, res, user.email);
+			});
+	} else {
+		sendJsonResponse(res, 404, {
+			"message": "User not found"
+		});
+		return;
+	}
+};
+		
+	
+	
 module.exports.recipesReadAll = function(req, res) {
 	Recipe
 		.find({})
@@ -19,27 +47,29 @@ module.exports.recipesReadAll = function(req, res) {
 };
 
 module.exports.recipesCreate = function(req, res) {
-	Recipe.create({
-		name: req.body.name,
-		user: req.body.user,
-		sourceUrl: req.body.sourceUrl,
-		ingredients: req.body.ingredients.split("\n").filter(Boolean),
-		directions: req.body.directions.split("\n").filter(Boolean),
-		rating: req.body.rating,
-		photoUrl: req.body.photoUrl,
-		notes: req.body.notes,
-		prepTime: req.body.prepTime,
-		cookTime: req.body.cookTime,
-		servings: req.body.servings,
-		course: req.body.course,
-		mainIngredient: req.body.mainIngredient,
-		tags: req.body.tags.split(",")
-	}, function(err, recipe) {
-		if(err) {
-			sendJsonResponse(res, 400, err);
-		} else {
-			sendJsonResponse(res, 201, recipe);
-		}
+	getUserEmail(req, res, function(req, res, userEmail) {
+		Recipe.create({
+			name: req.body.name,
+			user: userEmail,
+			sourceUrl: req.body.sourceUrl,
+			ingredients: req.body.ingredients.split("\n").filter(Boolean),
+			directions: req.body.directions.split("\n").filter(Boolean),
+			rating: req.body.rating,
+			photoUrl: req.body.photoUrl,
+			notes: req.body.notes,
+			prepTime: req.body.prepTime,
+			cookTime: req.body.cookTime,
+			servings: req.body.servings,
+			course: req.body.course,
+			mainIngredient: req.body.mainIngredient,
+			tags: (req.body.tags ? req.body.tags.split(",") : req.body.tags)
+		}, function(err, recipe) {
+			if(err) {
+				sendJsonResponse(res, 400, err);
+			} else {
+				sendJsonResponse(res, 201, recipe);
+			}
+		});
 	});
 };
 
@@ -87,7 +117,7 @@ module.exports.recipesUpdateOne = function(req, res) {
 					return;
 				}
 				recipe.name = req.body.name;
-				recipe.user = req.body.user;
+				//recipe.user = req.body.user;
 				recipe.sourceUrl = req.body.sourceUrl;
 				recipe.ingredients = req.body.ingredients.split("\n").filter(Boolean);
 				recipe.directions = req.body.directions.split("\n").filter(Boolean);
@@ -99,7 +129,8 @@ module.exports.recipesUpdateOne = function(req, res) {
 				recipe.servings = req.body.servings;
 				recipe.course = req.body.course;
 				recipe.mainIngredient = req.body.mainIngredient;
-				recipe.tags = req.body.tags.split(",");
+				recipe.tags = req.body.tags.split("\n").filter(Boolean);
+				
 				recipe.save(function(err, recipe) {
 					if(err) {
 						sendJsonResponse(res, 404, err);
