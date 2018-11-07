@@ -34,6 +34,14 @@
 			});
 		};
 		
+		const deleteRecipe = function(recipeid) {
+			return $http.delete('/api/recipes/' + recipeid, {
+				headers: {
+					Authorization: 'Bearer ' + authentication.getToken()
+				}
+			});
+		};
+		
 		//Takes in an array and boolean (extraLine), and returns a string with newlines 
 		//characters inserted. extraLine puts a blank line between each string
 		const addLineBreaks = function(array, extraLine) {
@@ -55,6 +63,7 @@
 			recipeById : recipeById,
 			addRecipe : addRecipe,
 			editRecipe : editRecipe,
+			deleteRecipe : deleteRecipe,
 			addLineBreaks : addLineBreaks
 		};
 	};

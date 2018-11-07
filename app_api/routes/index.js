@@ -15,7 +15,7 @@ router.get('/recipes', auth, ctrlRecipes.recipesReadAll);
 router.post('/recipes', auth, ctrlRecipes.recipesCreate);
 router.get('/recipes/:recipeid', ctrlRecipes.recipesReadOne);
 router.put('/recipes/:recipeid', auth, ctrlRecipes.recipesUpdateOne);
-router.delete('/recipes/:recipeid', ctrlRecipes.recipesDeleteOne);
+router.delete('/recipes/:recipeid', auth, ctrlRecipes.recipesDeleteOne);
 
 /* Users */
 router.post('/register', ctrlAuth.register);

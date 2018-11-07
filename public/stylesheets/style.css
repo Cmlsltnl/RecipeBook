@@ -36,6 +36,14 @@ a {
 	width: 800px;
 }
 
+.app-modal-confirm .modal-dialog {
+	max-width:25%;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%) !important;
+}
+
 .img-recipe {
 	max-height: 400px;
 }

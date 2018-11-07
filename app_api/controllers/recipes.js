@@ -62,7 +62,7 @@ module.exports.recipesCreate = function(req, res) {
 			servings: req.body.servings,
 			course: req.body.course,
 			mainIngredient: req.body.mainIngredient,
-			tags: (req.body.tags ? req.body.tags.split(",") : req.body.tags)
+			tags: (req.body.tags ? req.body.tags.split("\n").filter(Boolean) : req.body.tags)
 		}, function(err, recipe) {
 			if(err) {
 				sendJsonResponse(res, 400, err);
